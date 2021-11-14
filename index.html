@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+    </style>
+</head>
+<body>
+   <table id="tab" >
+       <thead>
+           <tr>
+               <th>Serial_number</th>
+               <th>Name</th>
+               <th>Quantity</th>
+               <th>Unit</th>
+               <th>Department</th>
+               <th>Unit</th>
+           </tr>
+           <tbody >
+               <tr>
+                   <td>hello</td>
+                   <td>hi</td>
+               </tr>
+           </tbody>
+       </thead>
+   </table>
+
+
+
+
+
+
+
+
+ <script>
+     var vegetable=document.querySelector("#tab > tbody");
+     
+     function loadData() {
+            const request = new XMLHttpRequest();
+            request.open("get", "Ajax.json");
+            request.onload = () => {
+                try {
+                    const json = JSON.parse(request.responseText);
+                    populateTable(json);
+                    }  catch (e) {
+                        console.warn("error");
+                    }   
+                };
+                
+            request.send();
+        }
+        function populateTable(json){
+          
+          
+           while (vegetable.firstChild) {
+          vegetable.removeChild(vegetable.firstChild);
+                 }
+
+                 
+json.forEach((row) => {
+const tr = document.createElement("tr");
+console.log(row)
+
+row.forEach((cell) => {
+  const td = document.createElement("td");
+  td.textContent = cell;
+  tr.appendChild(td);
+})
+
+vegetable.appendChild(tr);
+})
+
+
+    
+
+                     
+            
+        }
+
+        document.addEventListener("DOMContentLoaded",()=>{ loadData();})
+     
+ </script>
+</body>
+</html>
